@@ -1,0 +1,244 @@
+/* --- General Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #FFFFFF; /* 60% Dominant Color */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header & Nav (30% Secondary Color) --- */
+.navbar {
+    background-color: #1A374D; /* Navy Blue */
+    padding: 15px 0;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo-accent {
+    color: #2ECC71; /* Accent Color in Logo */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #2ECC71;
+}
+
+/* --- Toggle Menu Design --- */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: 0.3s;
+}
+
+/* --- Hero Section --- */
+.hero {
+    padding: 80px 0;
+    background-color: #FDFDFD;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-flex {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content { flex: 1; }
+
+.hero-content h1 {
+    font-size: 42px;
+    color: #1A374D;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    
+}
+
+/* --- Buttons (10% Accent Color) --- */
+.btn-login, .btn-primary {
+    background-color: #2ECC71; /* Success Green */
+    color: white !important;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-secondary {
+    border: 2px solid #1A374D;
+    color: #1A374D;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-image { flex: 1; text-align: right; }
+.hero-image img { max-width: 100%; border-radius: 10px; }
+
+/* --- Mobile Responsive (Media Queries) --- */
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        left: -100%;
+        flex-direction: column;
+        background-color: #1A374D;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 20px 0;
+    }
+
+    .nav-links.active { left: 0; }
+    .nav-links li { margin: 15px 0; }
+
+    .hero-flex { flex-direction: column; text-align: center; }
+    .hero-btns { flex-direction: column; }
+    .hero-content h1 { font-size: 30px; }
+} 
+ 
+/* Requirements Section Styles */
+.requirements-section {
+    padding: 60px 0;
+    background-color: #ffffff; /* 60% white */
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    color: #1A374D; /* 30% Navy Blue */
+    font-size: 28px;
+}
+
+.underline {
+    width: 80px;
+    height: 4px;
+    background-color: #2ECC71; /* 10% Green */
+    margin: 10px auto;
+}
+
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.req-card {
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 10px;
+    border-top: 4px solid #1A374D;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.req-card.highlight {
+    border-top-color: #2ECC71; /* በማሽን ሊዝ ላይ ትኩረት ለመስጠት */
+}
+
+.req-card h3 {
+    color: #1A374D;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.req-card h4 {
+    color: #555;
+    margin-top: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.req-card ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.req-card ul li {
+    padding: 5px 0;
+    font-size: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.req-card ul li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+    color: #2ECC71;
+    font-size: 12px;
+}
+
+.important-note {
+    margin-top: 40px;
+    background-color: #fff3cd; /* ለየት ያለ የማስጠንቀቂያ ከለር */
+    padding: 20px;
+    border-left: 5px solid #ffc107;
+    border-radius: 5px;
+    text-align: center;
+}

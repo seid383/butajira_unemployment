@@ -4,117 +4,132 @@ include("../database/db.php");
 
 $where = [];
 
+/* ===== ፆታ ===== */
 if (!empty($_GET['gender'])) {
-    $gender = mysqli_real_escape_string($conn, $_GET['gender']);
+    $gender = mysqli_real_escape_string($conn,$_GET['gender']);
     $where[] = "gender='$gender'";
 }
-
-if (!empty($_GET['education_level'])) {
-    $education = mysqli_real_escape_string($conn, $_GET['education_level']);
+/* ===== ትምህርት ===== */
+if (!empty($_GET['education'])) {
+    $education = mysqli_real_escape_string($conn,$_GET['education']);
     $where[] = "education_level='$education'";
 }
 
-if (!empty($_GET['village'])) {
-    $village = mysqli_real_escape_string($conn, $_GET['village']);
-    $where[] = "village LIKE '%$village%'";
+/* ===== መንደር ===== */
+if (!empty($_GET['village_select'])) {
+    $village = mysqli_real_escape_string($conn,$_GET['village_select']);
+    $where[] = "village_select LIKE '%$village%'";
 }
 
 $sql = "SELECT * FROM job_seekers";
 
-if (count($where) > 0) {
-    $sql .= " WHERE " . implode(" AND ", $where);
+if(count($where)>0){
+$sql .= " WHERE ".implode(" AND ",$where);
 }
 
 $sql .= " ORDER BY registered_at DESC";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn,$sql);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Filter Job Seekers</title>
+<meta charset="UTF-8">
+<title>ተመዝጋቢዎች</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Registered Job Seekers</h2>
+<div class="topbar">
+<h2>👥 የተመዝጋቢ ዝርዝር</h2>
+<a href="dashboard.php" class="logout">⬅️ ተመለስ</a>
+</div>
 
-<!-- FILTER FORM -->
+<div class="container">
+
+<div class="filter-box">
 <form method="GET">
-    Gender:
-    <select name="gender">
-        <option value="">All</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
 
-    Education:
-    <select name="education_level">
-        <option value="">All</option>
-        <option value="0">No Education</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="diploma">diploma</option>
-        <option value="degree">degree</option>
-        <option value="master">master</option>
-    </select>
-    Age range:
-    <select name="age_range">
-    <option value="">All </option>
-    <option value="18-20">18-20 </option>
-    <option value="21-24">21-24 </option>
-    <option value="25-28">25-28 </option>
-    <option value="28-32">28-32 </option>
-    <option value="32-36">32-36 </option>
-    <option value="37-43">37-43 </option>
-    <option value="44-64">44-64 </option>
-    Village:
-    <input type="text" name="village" placeholder="Village name">
+<label>ፆታ</label>
+<select name="gender">
+<option value="">ሁሉም</option>
+<option value="ወንድ">ወንድ</option>
+<option value="ሴት">ሴት</option>
+</select>
 
-    <button type="submit">Filter</button>
-    <a href="view_users.php">Reset</a>
+<label>ትምህርት</label>
+<select name="education">
+<option value="">ሁሉም</option>
+<option>የለም</option>
+<option>1-4</option>
+<option>5-8</option>
+<option>9-10</option>
+<option>11-12</option>
+<option>ቲቪቲ</option>
+<option>ድግሪ</option>
+<option>ማስተር</option>
+<option>ከዚያ በላይ</option>
+</select>
+
+<label>መንደር</label>
+<input type="text" name="village">
+
+<button type="submit">🔎 ፈልግ</button>
+<a href="view_users.php">Reset</a>
+
 </form>
+</div>
 
-<br>
-<table class="table table-bordered table-striped table-hover">
-    <div class="container mt-4">
+<table class="data-table">
+
 <tr>
-    <th>ID</th>
-    <th>Full Name</th>
-    <th>Phone</th>
-    <th>Age Range</th>
-    <th>Gender</th>
-    <th>Education</th>
-    <th>Village</th>
-    <th>Job Interest</th>
+<th>መለያ</th>
+<th>ሙሉ ስም</th>
+<th>ፆታ</th>
+<th>ዕድሜ</th>
+<th>ስልክ</th>
+<th>የትምህርት ደረጃ</th>
+<th>ክልል</th>
+<th>ዞን</th>
+<th>ከተማ</th>
+<th>ቀበሌ</th>
+<th>መንደር</th>
+<th>የመረጠው የስራ መስክ</th>
+<th>ልዩ ሁኔታ</th>
+<th>አደረጃጀት</th>
+<th>በባዮሜትሪክስ</th>
+<th>የተመዘገበበት/ችበት ቀን</th>
+<th>ስራ የገባበት/ችበት ቀን</th>
+
 </tr>
 
-<?php while($row = mysqli_fetch_assoc($result)) { ?>
+<?php while($row=mysqli_fetch_assoc($result)){ ?>
 <tr>
-    <td><?= $row['id']; ?></td>
-    <td><?= $row['full_name']; ?></td>
-    <td><?= $row['phone']; ?></td>
-    <td><?= $row['age_range']; ?></td>
-    <td><?= $row['gender']; ?></td>
-    <td><?= $row['education_level']; ?></td>
-    <td><?= $row['village']; ?></td>
-    <td><?= $row['job_interest']; ?></td>
+<td><?= $row['id']; ?></td>
+<td><?= $row['full_name']; ?></td>
+<td><?= $row['gender']; ?></td>
+<td><?= $row['age']; ?></td>
+<td><?= $row['phone']; ?></td>
+<td><?= $row['education_level']; ?></td>
+<td><?= $row['region']; ?></td>
+<td><?= $row['zone']; ?></td>
+<td><?= $row['town']; ?></td>
+<td><?= $row['kebele']; ?></td>
+<td><?= $row['village_select']; ?></td>
+<td><?= $row['job_interest']; ?></td>
+<td><?= $row['situation']; ?></td>
+<td><?= $row['structure']; ?></td>
+<td><?= $row['biometrics']; ?></td>
+<td><?= $row['registered_at']; ?></td>
+<td><?= $row['created_at']; ?></td>
 </tr>
 <?php } ?>
-</div>
+
 </table>
 
-<br>
-<a href="dashboard.php">Back to Dashboard</a>
+</div>
 
 </body>
 </html>

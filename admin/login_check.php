@@ -1,25 +1,30 @@
 <?php
 session_start();
-include(__DIR__ . "/../database/db.php");
+include("../database/db.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
 
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = md5($_POST['password']);
+$stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND status=1");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    $sql = "SELECT * FROM admins 
-            WHERE username='$username' 
-            AND password='$password'";
+if ($user = $result->fetch_assoc()) {
 
-    $result = mysqli_query($conn, $sql);
+    if (password_verify($password, $user['password'])) {
 
-    if (mysqli_num_rows($result) == 1) {
-        $_SESSION['admin'] = $username;
-        header("Location: dashboard.php");
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role']    = $user['role'];
+
+        if ($user['role'] === 'admin') {
+            header("Location: dashboard.php");
+        } else {
+            header("Location: ../staff/staff_dashboard.php");
+        }
         exit();
-    } else {
-        echo "<h3>❌ Invalid username or password</h3>";
-        echo "<a href='login.php'>Back to Login</a>";
     }
 }
+
+echo "❌ Invalid login";
 ?>
