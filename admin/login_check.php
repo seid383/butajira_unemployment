@@ -2,29 +2,51 @@
 session_start();
 include("../database/db.php");
 
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
+/* ===== GET INPUT ===== */
+$username = trim($_POST['username'] ?? '');
+$password = trim($_POST['password'] ?? '');
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND status=1");
-$stmt->bind_param("s", $username);
+if($username=='' || $password==''){
+    exit("❌ Empty login");
+}
+
+/* ===== PREPARE QUERY ===== */
+$stmt = $conn->prepare("
+SELECT id,username,password,role
+FROM users
+WHERE username=? AND status=1
+");
+
+if(!$stmt){
+    die("SQL Prepare Error");
+}
+
+$stmt->bind_param("s",$username);
 $stmt->execute();
-$result = $stmt->get_result();
 
-if ($user = $result->fetch_assoc()) {
+$res = $stmt->get_result();
 
-    if (password_verify($password, $user['password'])) {
+/* ===== CHECK USER ===== */
+if($user = $res->fetch_assoc()){
 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role']    = $user['role'];
+    if(password_verify($password,$user['password'])){
 
-        if ($user['role'] === 'admin') {
+        session_regenerate_id(true);
+
+        $_SESSION['user_id']   = $user['id'];
+        $_SESSION['username']  = $user['username'];   // ✅ important
+        $_SESSION['role']      = $user['role'];
+        $_SESSION['LAST_LOGIN']= time();
+
+        if($user['role']=="admin"){
             header("Location: dashboard.php");
-        } else {
+        }else{
             header("Location: ../staff/staff_dashboard.php");
         }
         exit();
     }
 }
 
+/* ===== FAIL ===== */
 echo "❌ Invalid login";
 ?>

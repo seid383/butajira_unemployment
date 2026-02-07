@@ -42,20 +42,29 @@
 
                         <div class="mb-3">
                             <label class="form-label">ስልክ ቁጥር</label>
-                            <input type="text" name="phone" class="form-control" required>
+                            <input 
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        class="form-control"
+                        placeholder="09XXXXXXXX or +2519XXXXXXXX"
+                        required
+                        >
+                        <small id="phoneMsg"></small>
+
                         </div>
                            <div class="mb-3">
     <label class="form-label">የትምህርት ደረጃ</label>
-    <select name="education" class="form-select" required>
+    <select name="education_level" class="form-select" required>
         <option value="">-- ይምረጡ --</option>
-        <option value="ያልተያልተማረ/ች">የለም</option>
+        <option value="ያልተማረ/ች">ያልተማረ/ች</option>
         <option value="1-6">1–6</option>
         <option value="7-8">7–8</option>
         <option value="9-10">9–10</option>
         <option value="11-12">11–12</option>
-        <option value="TVET">ቲቪቲ</option>
-        <option value="Degree">ድግሪ</option>
-        <option value="Master">ማስተር</option>
+        <option value="TVET">TVET</option>
+        <option value="Degree">Degree</option>
+        <option value="Master">Master</option>
         <option value="ከዚያ በላይ">ከዚያ በላይ</option>
     </select>
 </div>
@@ -215,4 +224,32 @@ function checkOtherJob() {
     document.getElementById("otherJobDiv").style.display =
         (val === "ሌላ") ? "block" : "none";
 }
+
+
+const phoneInput=document.getElementById("phone");
+const msg=document.getElementById("phoneMsg");
+
+phoneInput.addEventListener("input",()=>{
+
+let phone=phoneInput.value.trim();
+
+/* normalize */
+phone=phone.replace(/\s+/g,'');
+
+/* ethiopia regex */
+const regex=/^(09|07)\d{8}$|^(?:\+251|251)(9|7)\d{8}$/;
+
+if(regex.test(phone)){
+msg.innerHTML="✅ valid number";
+msg.style.color="green";
+phoneInput.style.border="2px solid green";
+}else{
+msg.innerHTML="❌ invalid ethiopian phone";
+msg.style.color="red";
+phoneInput.style.border="2px solid red";
+}
+
+});
+
 </script>
+

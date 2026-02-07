@@ -1,0 +1,289 @@
+/* ===== GLOBAL ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f4f6f9;
+color:#333;
+}
+
+/* ===== TOPBAR ===== */
+.topbar{
+background:#0b5ed7;
+color:white;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.topbar h2{
+font-size:20px;
+}
+
+.logout{
+background:#dc3545;
+color:white;
+padding:8px 14px;
+text-decoration:none;
+border-radius:6px;
+font-size:14px;
+}
+
+.logout:hover{
+background:#bb2d3b;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+padding:25px;
+}
+
+/* ===== CARDS ===== */
+.cards{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+flex:1;
+min-width:200px;
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.num{
+font-size:28px;
+font-weight:bold;
+color:#0b5ed7;
+margin-top:10px;
+}
+
+/* ===== BUTTONS ===== */
+.buttons{
+margin-top:25px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.buttons a{
+background:#198754;
+color:white;
+padding:12px 18px;
+text-decoration:none;
+border-radius:8px;
+font-size:15px;
+}
+
+.buttons a:hover{
+background:#157347;
+}
+
+/* ===== TABLE ===== */
+.data-table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:white;
+box-shadow:0 3px 8px rgba(0,0,0,0.05);
+}
+
+.data-table th,
+.data-table td{
+padding:10px;
+border:1px solid #ddd;
+text-align:left;
+font-size:14px;
+}
+
+.data-table th{
+background:#0b5ed7;
+color:white;
+}
+
+/* ===== FILTER ===== */
+.filter-box{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+margin-bottom:20px;
+}
+
+.filter-box select,
+.filter-box input{
+padding:8px;
+margin-right:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.filter-box button{
+background:#0b5ed7;
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.filter-box button:hover{
+background:#084298;
+}
+
+/* ===== LOGIN CARD ===== */
+.card-login{
+width:350px;
+margin:80px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.card-login input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.card-login button{
+width:100%;
+padding:10px;
+margin-top:15px;
+background:#0b5ed7;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.card-login button:hover{
+background:#084298;
+}
+
+
+
+
+
+/* ===== CENTER WRAPPER ===== */
+.auth-wrapper{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+/* ===== LOGIN BOX ===== */
+.auth-box{
+width:380px;
+padding:35px;
+background:#ffffff;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+position:relative;
+overflow:hidden;
+}
+
+/* TOP BORDER ACCENT */
+.auth-box::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:5px;
+background:linear-gradient(90deg,#198754,#20c997);
+}
+
+/* ===== TITLE ===== */
+.auth-heading{
+font-size:24px;
+font-weight:700;
+color:#198754;
+margin-bottom:25px;
+text-align:center;
+}
+
+/* ===== INPUT FIELD ===== */
+.input-group{
+margin-bottom:18px;
+text-align:left;
+}
+
+.input-group label{
+font-size:13px;
+font-weight:600;
+color:#555;
+margin-bottom:5px;
+display:block;
+}
+
+.input-group input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #ddd;
+font-size:14px;
+transition:all .2s ease;
+background:#f9f9f9;
+}
+
+.input-group input:focus{
+border-color:#20c997;
+background:#fff;
+box-shadow:0 0 0 3px rgba(32,201,151,0.15);
+outline:none;
+}
+
+/* ===== BUTTON ===== */
+.btn-login{
+width:100%;
+padding:12px;
+background:linear-gradient(135deg,#198754,#20c997);
+border:none;
+border-radius:8px;
+font-size:15px;
+font-weight:600;
+color:#fff;
+cursor:pointer;
+transition:0.25s;
+}
+
+.btn-login:hover{
+transform:translateY(-1px);
+box-shadow:0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* ===== ERROR MESSAGE ===== */
+.auth-error{
+background:#ffe5e5;
+color:#cc0000;
+padding:10px;
+border-radius:6px;
+font-size:13px;
+margin-bottom:15px;
+text-align:center;
+}
+
+
+
+

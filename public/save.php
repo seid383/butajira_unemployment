@@ -1,50 +1,72 @@
 <?php
 include("../database/db.php");
 
-/* ===== RECEIVE DATA ===== */
-$full_name = mysqli_real_escape_string($conn, $_POST['full_name'] ?? '');
-$gender    = mysqli_real_escape_string($conn, $_POST['gender'] ?? '');
-$age       = mysqli_real_escape_string($conn, $_POST['age'] ?? '');
-$phone     = mysqli_real_escape_string($conn, $_POST['phone'] ?? '');
-$education_level = mysqli_real_escape_string($conn, $_POST['education'] ?? '');
+/* ===== RECEIVE ===== */
+$full_name = $_POST['full_name'] ?? '';
+$gender    = $_POST['gender'] ?? '';
+$age       = $_POST['age'] ?? '';
+$phone=$_POST['phone'] ?? '';
 
-$region = mysqli_real_escape_string($conn, $_POST['region'] ?? '');
-$zone   = mysqli_real_escape_string($conn, $_POST['zone'] ?? '');
-$town   = mysqli_real_escape_string($conn, $_POST['town'] ?? '');
+if(!preg_match('/^(09|07)[0-9]{8}$|^(?:\+251|251)(9|7)[0-9]{8}$/',$phone)){
+exit("❌ Invalid Ethiopian phone number");
+}
 
-$kebele = mysqli_real_escape_string($conn, $_POST['kebele'] ?? '');
-$village = mysqli_real_escape_string($conn, $_POST['village_select'] ?? '');
+$education_level = $_POST['education_level'] ?? '';
 
-$job_interest = mysqli_real_escape_string($conn, $_POST['job_select'] ?? '');
-$situation    = mysqli_real_escape_string($conn, $_POST['special'] ?? '');
-$structure    = mysqli_real_escape_string($conn, $_POST['structure'] ?? '');
+$region = $_POST['region'] ?? '';
+$zone   = $_POST['zone'] ?? '';
+$town   = $_POST['town'] ?? '';
+
+$kebele = $_POST['kebele'] ?? '';
+$village = $_POST['village_select'] ?? '';
+
+$job_interest = $_POST['job_select'] ?? '';
+$situation    = $_POST['special'] ?? '';
+$structure    = $_POST['structure'] ?? '';
 
 /* ===== VALIDATION ===== */
-if (
-    $full_name == '' ||
-    $phone == '' ||
-    $age == '' ||
-    $gender == '' ||
-    $education_level == '' ||
-    $kebele == '' ||
-    $village == '' ||
-    $job_interest == '' ||
-    $situation == ''
-) {
-    echo "<h3 style='color:red;'>❌ ያልተሞላ ነገር አለ፣ እባኮ በድጋሚ ይሙሉ!</h3>";
-    echo "<a href='register.php'>ወደ ኋላ</a>";
-    exit();
+if(
+!$full_name || !$phone || !$age ||
+!$gender || !$education_level ||
+!$kebele || !$village ||
+!$job_interest || !$situation
+){
+exit("❌ መረጃ አልተሟላም");
+}
+
+/* ===== DUPLICATE CHECK ===== */
+$check=$conn->prepare("
+SELECT 1 FROM job_seekers
+WHERE full_name=? AND phone=?
+LIMIT 1
+");
+$check->bind_param("ss",$full_name,$phone);
+$check->execute();
+$check->store_result();
+
+if($check->num_rows>0){
+exit("⚠️ ይህ ሰው አስቀድሞ ተመዝግቧል");
 }
 
 /* ===== INSERT ===== */
-$sql = "INSERT INTO job_seekers
-(full_name, gender, age, phone, education_level, region, zone, town, kebele, village_select, job_interest, situation, structure)
-VALUES
-('$full_name','$gender','$age','$phone','$education_level','$region','$zone','$town','$kebele','$village','$job_interest','$situation','$structure')";
+$stmt=$conn->prepare("
+INSERT INTO job_seekers
+(full_name, gender, age, phone, education_level,
+region, zone, town, kebele, village_select,
+job_interest, situation, structure)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+");
 
-if (mysqli_query($conn, $sql)) {
-    echo "<h3 style='color:green;'>✅ Registration successful. Thank you.</h3>";
-} else {
-    echo "Database Error: " . mysqli_error($conn);
+$stmt->bind_param(
+"sssssssssssss",
+$full_name,$gender,$age,$phone,$education_level,
+$region,$zone,$town,$kebele,$village,
+$job_interest,$situation,$structure
+);
+
+if($stmt->execute()){
+echo "✅ Registration successful";
+}else{
+echo "❌ Database Error";
 }
 ?>

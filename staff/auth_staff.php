@@ -1,8 +1,8 @@
 <?php
-session_start();
+include("../admin/auth_core.php");
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'staff') {
-    header("Location: ../admin/login.php");
-    exit();
+if($_SESSION['role']!=='staff'){
+header("Location: ../admin/login.php");
+exit();
 }
 ?>
