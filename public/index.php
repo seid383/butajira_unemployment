@@ -1,3 +1,6 @@
+<?php
+include "header.php";
+?>
 <!DOCTYPE html>
 <html lang="am">
 <head>
@@ -5,33 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Butajira Enterprise -  Registration</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ከላይ መሆን ያለበት */
+    </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-text">Butajira</span><span class="logo-accent"> Enterprise</span>
-            </div>
-            
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-
-            <nav class="nav-container">
-                <ul class="nav-links" id="nav-list">
-                    <li><a href="index.php">መነሻ</a></li>
-                    <li><a href="about.php">ስለ እኛ</a></li> 
-                     <li><a href="#requirements">መስፈርቶች</a></li>
-                    <li><a href="annoucement.php">ማስታወቅያ</a></li> 
-                    <li><a href="register.php">መመዝገብ</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    
     <main>
         <section class="hero">
             <div class="container hero-flex">
@@ -74,7 +57,7 @@
             </div>
 
             <div class="req-card">
-                <h3><i class="icon">🏭</i> 2. አነስተኛና መካከለኛ ማኑፋክቸሪንግ</h3>
+                <h3><i class="icon"></i> 2. አነስተኛና መካከለኛ ማኑፋክቸሪንግ</h3>
                 <ul>
                     <li>የቦታ ጥያቄ ማመልከቻ እና የታደሰ መታወቂያ ኮፒ</li>
                     <li>የግብር ከፋይ መለያ ቁጥር (TIN) እና የታደሰ የንግድ ሥራ ፈቃድ</li>
@@ -84,7 +67,7 @@
             </div>
 
             <div class="req-card highlight">
-                <h3><i class="icon">⚙️</i> 3. የማሽን ሊዝ (Leasing)</h3>
+                <h3><i class="icon"></i> 3. የማሽን ሊዝ (Leasing)</h3>
                 <ul>
                     <li>ከአበዳሪ ተቋማት ከዕዳ ነፃ መሆኑን የሚገልጽ ማስረጃ</li>
                     <li>የኪራይ ተረካቢ ውል እና የተሟላ መሠረተ ልማት ማስረጃ</li>
@@ -99,6 +82,25 @@
         </div>
     </div>
 </section>
+<footer>
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>አድራሻ</h3>
+                <p>
+                    📍 ቡታጅራ፣ ምስራቅ ጉራጌ<br>
+                    📞 ስልክ: +251 46 115 XXXX<br>
+                    📧 ኢሜይል: info@butajira.gov.et<br>
+                    🕒 የስራ ሰዓት: ሰኞ - አርብ (2:30 - 11:30)
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 የቡታጅራ ከተማ አስተዳደር። መብቱ በህግ የተጠበቀ ነው።</p>
+        </div>
+    </div>
+</footer>
 
   <script>
        // ኤለመንቶቹን መምረጥ

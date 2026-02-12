@@ -1,78 +1,106 @@
-<!DOCTYPE html>
-<html>
+ <?php
+include "header.php";
+?>
+ <!DOCTYPE html>
+<html lang="am">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>የስራ አጥ ምዝገባ - ቡታጅራ</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styleR.css">
+
 </head>
+<body>
 
-<body class="bg-light">
-<p style="font-size: 20px;"> <a href="index.php">⬅️ወደ ኋላ</a></p>
-<div class="container mt-5"></div> 
-    <div class="row justify-content-center">
-        <div class="col-md-7">
+   
+    <?php if(isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+    <div id="success-alert" class="alert-success-custom">
+        ✅ ምዝገባዎ በተሳካ ሁኔታ ተጠናቋል! እናመሰግናለን።
+    </div>
 
-            <div class="card shadow-lg">
-                <div class="card-header text-center bg-success text-white">
-                    <h4>የስራ አጦች መመዝገብያ ፎርም</h4>
-                    <small>ቡታጅራ ከተማ</small>
-                </div>
+    <script>
+        // ገጹ እንደተከፈተ ቆጠራ ይጀምራል
+        setTimeout(function() {
+            var alertElement = document.getElementById('success-alert');
+            if (alertElement) {
+                // መጀመሪያ መልእክቱ እንዲደበዝዝ እናደርጋለን
+                alertElement.style.transition = "opacity 1s ease";
+                alertElement.style.opacity = "0";
+                
+                // ሙሉ ለሙሉ ከገጹ ላይ ለማጥፋት (ከ 1 ሰከንድ ድብዘዛ በኋላ)
+                setTimeout(function() {
+                    alertElement.remove();
+                }, 1000);
+            }
+        }, 5000); // 5000 ማለት 5 ሰከንድ ማለት ነው
+    </script>
+<?php endif; ?>
 
-                <div class="card-body">
-                    <form action="save.php" method="POST">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>የስራ አጦች መመዝገብያ ፎርም</h4>
+                <p>ቡታጅራ ከተማ አስተዳደር</p>
+            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">ሙሉ ስም</label>
-                            <input type="text" name="full_name" class="form-control" required>
-                        </div>
+            <div class="card-body">
+                <form action="save.php" method="POST" id="registrationForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">ሙሉ ስም</label>
+                        <input type="text" name="full_name" class="form-control" placeholder="ሙሉ ስም ያስገቡ" required>
+                    </div>
+
+                    <div class="row">
                         <div class="mb-3">
                             <label class="form-label">ፆታ</label>
                             <select name="gender" class="form-select" required>
                                 <option value="">-- ይምረጡ --</option>
-                                <option>ወንድ</option>
-                                <option>ሴት</option>
+                                <option value="ወንድ">ወንድ</option>
+                                <option value="ሴት">ሴት</option>
                             </select>
                         </div>
-
-                        
-
                         <div class="mb-3">
-                            <label class="form-label">ዕድሜ</label>
-                            <input type="number" name="age" class="form-control" required>
+                            <label class="form-label">ዕድሜ (18 - 64)</label>
+                            <input type="number" name="age" id="age" class="form-control" min="18" max="64" placeholder="እድሜ..." required>
+                            <small id="ageMsg" class="msg-text"></small>
                         </div>
+                    </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">ስልክ ቁጥር</label>
+                        <input type="text" name="phone" id="phone" class="form-control" placeholder="09XXXXXXXX" required>
+                        <small id="phoneMsg" class="msg-text"></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">የትምህርት ደረጃ</label>
+                        <select name="education" class="form-select" required>
+                            <option value="">-- ይምረጡ --</option>
+                            <option value="ያልተማረ">ያልተማረ</option>
+                            <option value="12">12ኛ ክፍል</option>
+                            <option value="TVT">TVT (ቴክኒክና ሙያ)</option>
+                            <option value="Degree">Degree (መጀመሪያ ድግሪ)</option>
+                            <option value="Master">Master (ሁለተኛ ድግሪ)</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
                         <div class="mb-3">
-                            <label class="form-label">ስልክ ቁጥር</label>
-                            <input type="text" name="phone" class="form-control" required>
-                        </div>
-                           <div class="mb-3">
-    <label class="form-label">የትምህርት ደረጃ</label>
-    <select name="education" class="form-select" required>
-        <option value="">-- ይምረጡ --</option>
-        <option value="ያልተያልተማረ/ች">የለም</option>
-        <option value="1-6">1–6</option>
-        <option value="7-8">7–8</option>
-        <option value="9-10">9–10</option>
-        <option value="11-12">11–12</option>
-        <option value="TVET">ቲቪቲ</option>
-        <option value="Degree">ድግሪ</option>
-        <option value="Master">ማስተር</option>
-        <option value="ከዚያ በላይ">ከዚያ በላይ</option>
-    </select>
-</div>
-                              <div class="mb-3">
                             <label class="form-label">ክልል</label>
-                            <input type="text" name="region" class="form-control" value="ማእከላዊ ኢትዮጵያ" readonly>
+                            <input type="text" name="region" class="form-control bg-light" value="ማእከላዊ ኢትዮጵያ" readonly>
                         </div>
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label class="form-label">ዞን</label>
-                            <input type="text" name="zone" class="form-control" value="ምስራቅ ጉራጌ" readonly>
+                            <input type="text" name="zone" class="form-control bg-light" value="ምስራቅ ጉራጌ" readonly>
                         </div>
-                         <div class="mb-3">
-                            <label class="form-label">ከተማ</label>
-                            <input type="text" name="town" class="form-control" value="ቡታጅራ " readonly>
-                        </div>
+                    </div>
 
-                        <!-- ቀበሌ -->
+                    <div class="row">
+                        <div class="mb-3">
+                            <label class="form-label">ከተማ</label>
+                            <input type="text" name="town" class="form-control bg-light" value="ቡታጅራ" readonly>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">ቀበሌ</label>
                             <select name="kebele" id="kebele" class="form-select" onchange="loadVillages()" required>
@@ -82,137 +110,184 @@
                                 <option value="ዘቢዳር">ዘቢዳር</option>
                             </select>
                         </div>
+                    </div>
 
-                        <!-- መንደር -->
-                        <div class="mb-3">
-                            <label class="form-label">መንደር</label>
-                            <select name="village_select" id="village_select" class="form-select" onchange="checkOtherVillage()" required>
-                                <option value="">-- መንደር ይምረጡ --</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">መንደር</label>
+                        <select name="village_select" id="village_select" class="form-select" onchange="checkOtherVillage()" required>
+                            <option value="">-- መጀመሪያ ቀበሌ ይምረጡ --</option>
+                        </select>
+                    </div>
 
-                        <!-- ሌላ መንደር -->
-                        <div class="mb-3" id="otherVillageDiv" style="display:none;">
-                            <label class="form-label">መንደር ስም ይፃፉ</label>
-                            <input type="text" name="village_other" class="form-control">
-                        </div>
-                           <div class="mb-3">
-                            <div class="mb-3">
-                            <label class="form-label">የስራ ፍላጎት</label>
-                            <select name="job_select" id="job_select" class="form-control" onchange="checkOtherJob()" required>
-                                <option value="">-- የስራ ፍላጎት --</option>
-                            </select>
-                        </div>
+                    <div class="mb-3" id="otherVillageDiv" style="display:none;">
+                        <label class="form-label">የመንደሩን ስም ይፃፉ</label>
+                        <input type="text" name="village_other" class="form-control">
+                    </div>
 
-                        <!-- ሌላ መንደር -->
-                         <div class="mb-3" id="otherJobDiv" style="display:none;">
-                            <label class="form-label">የስራ ፍላጎት ይጻፉ</label>
-                            <input type="text" name="job_other" class="form-control">
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">የስራ ፍላጎት</label>
+                        <select name="job_select" id="job_select" class="form-select" onchange="checkOtherJob()" required>
+                            <option value="">-- የስራ ፍላጎት ይምረጡ --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3" id="otherJobDiv" style="display:none;">
+                        <label class="form-label">የስራ ፍላጎቱን እዚህ ይፃፉ</label>
+                        <input type="text" name="job_other" class="form-control">
+                    </div>
+
+                    <div class="row">
                         <div class="mb-3">
                             <label class="form-label">ልዩ ሁኔታ</label>
-                            <select name="special" id="special" class="form-select" required>
-                                <option value="">-- ይምረጡ --</option>
+                            <select name="special" class="form-select" required>
                                 <option value="መደበኛ">መደበኛ</option>
                                 <option value="አካል ጉዳተኛ">አካል ጉዳተኛ</option>
                                 <option value="ስደተኛ">ስደተኛ</option>
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label class="form-label">አደረጃጀት</label>
-                            <select name="structure" class="form-select" >
+                            <select name="structure" class="form-select">
                                 <option value="">-- ይምረጡ --</option>
-                                <option>በግል</option>
-                                <option>በማህበር</option>
+                                <option value="በግል">በግል</option>
+                                <option value="በማህበር">በማህበር</option>
                             </select>
                         </div>
+                    </div>
 
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">መረጃውን መዝግብ</button>
+                    </div>
 
-                        <div class="d-grid">
-                            <button class="btn btn-success">መዝግብ</button>
-                        </div>
-
-                    </form>
-                </div>
-
-                <div class="card-footer text-center text-muted">
-                    © ቡታጅራ ከተማ
-                </div>
+                </form>
             </div>
 
+            <div class="card-footer text-center">
+                © ቡታጅራ ከተማ አስተዳደር
+            </div>
         </div>
     </div>
-</div>
+    <footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>አድራሻ</h3>
+                <p>
+                    📍 ቡታጅራ፣ ምስራቅ ጉራጌ<br>
+                    📞 ስልክ: +251 46 115 XXXX<br>
+                    📧 ኢሜይል: info@butajira.gov.et<br>
+                    🕒 የስራ ሰዓት: ሰኞ - አርብ (2:30 - 11:30)
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 የቡታጅራ ከተማ አስተዳደር። መብቱ በህግ የተጠበቀ ነው።</p>
+        </div>
+    </div>
+</footer>
 
 <script>
-/* ================== መንደር ================== */
-const villages = {
-    "እሪንዛፍ": [
-        "ነፃ ሰፈር","እምነት","ቆቶ","ሀያት","ባፋፋን","ጉሊት",
-        "ልማት","መሀል አራዳ","ሁለገብ","አብነት","ሶርሴ",
-        "ባንክ","ነፀብራቅ","ሰላም","ታቦር"
-    ],
-    "እሬሻ": [
-        "ወሌንሹ","ኮንዶሚኒየም","ሚሊንየም","ሰፈረ ሰላም","አዲስ",
-        "ኢንዱራንስ","መቂቾ ስላሴ","እንዳለ ገነሞ","ዋርካ",
-        "አለም ጤና","መምህራን","ላንባ","አክስዮን"
-    ],
-    "ዘቢዳር": [
-        "መነሀሪያ","ካምፕ 1","ካምፕ 2","እስታድየም","መድረሳ",
-        "ሸባብ","ገሊላ","ቢላል","አቱ ብሎክ 1","አቱ ብሎክ 2",
-        "አቱ ብሎክ 3","አቱ ብሎክ 4","ታይዋን","ዶቦ",
-        "ሬድ አሽ","ዋርካ"
-    ]
+/* ================== ዳይናሚክ መንደር (Villages) ================== */
+const villagesByKebele = {
+    "እሪንዛፍ": ["ነፃ ሰፈር","እምነት","ቆቶ","ሀያት","ባፋፋን","ጉሊት","ልማት","መሀል አራዳ","ሁለገብ","አብነት","ሶርሴ","ባንክ","ነፀብራቅ","ሰላም","ታቦር"],
+    "እሬሻ": ["ወሌንሹ","ኮንዶሚኒየም","ሚሊንየም","ሰፈረ ሰላም","አዲስ","ኢንዱራንስ","መቂቾ ስላሴ","እንዳለ ገነሞ","ዋርካ","አለም ጤና","መምህራን","ላንባ","አክስዮን"],
+    "ዘቢዳር": ["መነሀሪያ","ካምፕ 1","ካምፕ 2","እስታድየም","መድረሳ","ሸባብ","ገሊላ","ቢላል","አቱ ብሎክ 1","አቱ ብሎክ 2","አቱ ብሎክ 3","አቱ ብሎክ 4","ታይዋን","ዶቦ","ሬድ አሽ","ዋርካ"]
 };
 
 function loadVillages() {
-    const kebele = document.getElementById("kebele").value;
-    const villageSelect = document.getElementById("village_select");
+    const kebele = document.getElementById("kebele").value;
+    const villageSelect = document.getElementById("village_select");
+    villageSelect.innerHTML = `<option value="">-- መንደር ይምረጡ --</option>`;
 
-    villageSelect.innerHTML = `<option value="">-- መንደር ይምረጡ --</option>`;
-
-    if (villages[kebele]) {
-        villages[kebele].forEach(v => {
-            villageSelect.innerHTML += `<option value="${v}">${v}</option>`;
-        });
-    }
-
-    villageSelect.innerHTML += `<option value="ሌላ">ሌላ</option>`;
+    if (villagesByKebele[kebele]) {
+        villagesByKebele[kebele].forEach(v => {
+            villageSelect.innerHTML += `<option value="${v}">${v}</option>`;
+        });
+        villageSelect.innerHTML += `<option value="ሌላ">ሌላ (ዝርዝር ይፃፉ)</option>`;
+    }
 }
 
 function checkOtherVillage() {
-    const val = document.getElementById("village_select").value;
-    document.getElementById("otherVillageDiv").style.display =
-        (val === "ሌላ") ? "block" : "none";
+    const val = document.getElementById("village_select").value;
+    document.getElementById("otherVillageDiv").style.display = (val === "ሌላ") ? "block" : "none";
 }
 
-/* ================== የስራ ፍላጎት ================== */
-const jobs = [
-    "እህል ንግድ","አትክልት እና ፍራፍሬ","ባልትና ስራ","ዶሮ እርባታ",
-    "ኮስሞቶክስ","ጂኦሎጂስት","ኮምፒውተር","ሶፍትዌር ኢንጂነሪንግ",
-    "ፈርኒቸር","መብራት ዝርጋታ","ቢዝነስ ማናጅመንት","ጤና ነክ ስራ",
-    "ኮንስትራክሽን","ህግ","አይሲቲ","ኢንስታሌሽን","አውቶ","ግንባታ",
-    "ከብት እርባታ","ሸቀጣ ሸቀጥ","ሻይ ቡና","ፅዳትና ውበት",
-    "ከተማ ግብርና","በግ እርባታ","ኤችአርኤም","የወተት ከብት",
-    "የውበት ሳሎን","አገልግሎት","ልብስ ስፌት",
-    "ዳቦ መጋገር","ፀጉር ቤት","ስጋ ቤት"
+/* ================== የስራ ፍላጎት (Job Interests) ================== */
+const jobsList = [
+    "እህል ንግድ","አትክልት እና ፍራፍሬ","ባልትና ስራ","ዶሮ እርባታ","ኮስሞቶክስ","ጂኦሎጂስት","ኮምፒውተር","ሶፍትዌር ኢንጂነሪንግ",
+    "ፈርኒቸር","መብራት ዝርጋታ","ቢዝነስ ማናጅመንት","ጤና ነክ ስራ","ኮንስትራክሽን","ህግ","አይሲቲ","ኢንስታሌሽን","አውቶ","ግንባታ",
+    "ከብት እርባታ","ሸቀጣ ሸቀጥ","ሻይ ቡና","ፅዳትና ውበት","ከተማ ግብርና","በግ እርባታ","ኤችአርኤም","የወተት ከብት","የውበት ሳሎን",
+    "አገልግሎት","ልብስ ስፌት","ዳቦ መጋገር","ፀጉር ቤት","ስጋ ቤት"
 ];
 
 window.onload = function () {
-    const jobSelect = document.getElementById("job_select");
-    jobSelect.innerHTML = `<option value="">-- የስራ ፍላጎት --</option>`;
-
-    jobs.forEach(j => {
-        jobSelect.innerHTML += `<option value="${j}">${j}</option>`;
-    });
-
-    jobSelect.innerHTML += `<option value="ሌላ">ሌላ</option>`;
+    const jobSelect = document.getElementById("job_select");
+    jobsList.sort().forEach(j => {
+        jobSelect.innerHTML += `<option value="${j}">${j}</option>`;
+    });
+    jobSelect.innerHTML += `<option value="ሌላ">ሌላ (ዝርዝር ይፃፉ)</option>`;
 };
 
 function checkOtherJob() {
-    const val = document.getElementById("job_select").value;
-    document.getElementById("otherJobDiv").style.display =
-        (val === "ሌላ") ? "block" : "none";
+    const val = document.getElementById("job_select").value;
+    document.getElementById("otherJobDiv").style.display = (val === "ሌላ") ? "block" : "none";
 }
+
+/* ================== ስልክ ቁጥር ማረጋገጫ (Phone Validation) ================== */
+const phoneInput = document.getElementById("phone");
+const phoneMsg = document.getElementById("phoneMsg");
+
+phoneInput.addEventListener("input", () => {
+    let phone = phoneInput.value.trim().replace(/\s+/g,'');
+    const regex = /^(09|07)\d{8}$|^(?:\+251|251)(9|7)\d{8}$/;
+
+    if(regex.test(phone)){
+        phoneMsg.innerHTML = "✅ ትክክለኛ ቁጥር";
+        phoneMsg.style.color = "green";
+        phoneInput.style.borderColor = "#2ECC71";
+    } else {
+        phoneMsg.innerHTML = "❌ ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ";
+        phoneMsg.style.color = "red";
+        phoneInput.style.borderColor = "red";
+    }
+});
+
+/* ================== የእድሜ ማረጋገጫ (Age Validation) ================== */
+const ageInput = document.getElementById("age");
+const ageMsg = document.getElementById("ageMsg");
+
+ageInput.addEventListener("input", () => {
+    const age = parseInt(ageInput.value);
+    if (age < 18 || age > 64) {
+        ageMsg.innerHTML = "❌ እድሜ ከ18 እስከ 64 መሆን አለበት";
+        ageMsg.style.color = "red";
+        ageInput.style.borderColor = "red";
+    } else {
+        ageMsg.innerHTML = "✅ ተቀባይነት አለው";
+        ageMsg.style.color = "green";
+        ageInput.style.borderColor = "#2ECC71";
+    }
+});
+
+const mobileMenu = document.getElementById('mobile-menu');
+const navList = document.getElementById('nav-list');
+
+mobileMenu.addEventListener('click', () => {
+    // ሜኑውን መክፈት/መዝጋት (Toggle)
+    mobileMenu.classList.toggle('active');
+    navList.classList.toggle('active');
+});
+
+// ተጠቃሚው አንድ ሊንክ ሲነካ ሜኑው በራሱ እንዲዘጋ (ለተሻለ አጠቃቀም)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        navList.classList.remove('active');
+    });
+});
+
 </script>
+
+</body>
+</html>

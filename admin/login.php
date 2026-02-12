@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html>  
+<html lang="en">
 <head>
-
     <title>Admin Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../style.css">
 
+    <!-- Admin Global CSS -->
+    <link rel="stylesheet" href="assets/admin.css">
 </head>
 
-<body>
-<div class="card">
-<h3>Admin / Staff Login</h3>
+<body class="auth-page">
 
-<form method="POST" action="login_check.php">
-    <input type="text" name="username" placeholder="Username" required><br><br>
-    <input type="password" name="password" placeholder="Password" required><br><br>
-    <button type="submit">Login</button>
-</form>
+
+<div class="card">
+    <h3>Admin / Staff Login</h3>
+
+    <form method="POST" action="login_check.php">
+        <input type="text" name="username" placeholder="Username" required>
+
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
 </div>
+
 </body>
 </html>

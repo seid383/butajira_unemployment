@@ -1,0 +1,281 @@
+/* =========================
+   GLOBAL RESET
+   ========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "Segoe UI", Tahoma, Arial, sans-serif; /* Added Inter for a more modern feel */
+}
+
+/* =========================
+   LOGIN / AUTH PAGES
+   ========================= */
+body.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1e3c72;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Forms */
+form input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background: #1e3c72;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form button:hover {
+    background: #16315d;
+}
+
+/* =========================
+   DASHBOARD / TABLE PAGES
+   ========================= */
+body.view-users,
+body.dashboard {
+    background: #f1f5f9; /* Slightly darker grey for better contrast with white cards */
+    display: block;
+    padding: 24px;
+}
+
+/* Main Container */
+.admin-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+}
+
+/* =========================
+   FILTER / SEARCH BOX
+   ========================= */
+.filter-box {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.filter-box form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.filter-box input,
+.filter-box select {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff; /* Switched to white for input fields */
+    font-size: 14px;
+    color: #334155;
+    transition: border 0.2s;
+    min-width: 180px;
+}
+
+.filter-box input:focus,
+.filter-box select:focus {
+    outline: none;
+    border-color: #1e3c72;
+}
+
+/* =========================
+   TABLE WRAPPER
+   ========================= */
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* =========================
+   DATA TABLE
+   ========================= */
+.data-table {
+    width: 150%;
+    min-width: 1300px; /* Slightly wider to give columns room */
+    border-collapse: collapse;
+}
+
+/* Header */
+.data-table th {
+    background: #f8fafc; /* Light header for a cleaner "modern" look */
+    color: #475569; /* Darker grey instead of pure white */
+    padding: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    text-align: left; /* Aligned left for better readability */
+    border-bottom: 2px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Cells */
+.data-table td {
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.5; /* Better for Amharic text */
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+    white-space: normal;
+    word-break: keep-all; /* Better for Ethiopian script */
+}
+
+/* Alternate rows */
+.data-table tbody tr:nth-child(even) {
+    background: #fbfcfd;
+}
+
+.data-table tbody tr:hover {
+    background: #f0f7ff; /* Soft blue highlight */
+    transition: background-color 0.2s ease;
+}
+
+/* No-wrap helper */
+.nowrap {
+    white-space: nowrap !important;
+}
+
+/* =========================
+   DASHBOARD CARDS
+   ========================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-left: 5px solid #1e3c72; /* Integrated the line into border-left */
+}
+
+.dashboard-card::before { display: none; } /* Removed redundant pseudo-element */
+
+.dashboard-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.dashboard-card .count {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e3c72;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 0.1s, opacity 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn-primary { background: #1e3c72; }
+.btn-success { background: #10b981; }
+.btn-danger  { background: #ef4444; }
+.btn-secondary { background: #64748b; color: #fff; }
+
+/* =========================
+   BADGES
+   ========================= */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 9999px; /* Pill shape */
+    font-size: 12px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.badge-degree {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+/* =========================
+   LINKS
+   ========================= */
+a {
+    color: #1e3c72;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #2563eb;
+    text-decoration: none;
+}

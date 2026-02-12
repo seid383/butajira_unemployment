@@ -1,87 +1,116 @@
+<?php
+include "header.php";
+?>
 <!DOCTYPE html>
 <html lang="am">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us Section</title>
-
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            margin: 0 200px;
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            background-color: #f4f6f8;
-            color: #333;
-        }
-        body a{
-            font-size: 50px;
-        }
+        
+.map-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+h3{
+    color: #333;
+    bottom: 60px;
 
-        .about-section {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 50px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
+}
+iframe{
+    width: 82%;
+    height: 500px;
+}
 
-        .about-section h2 {
-            font-size: 32px;
-            color: #0b3c5d;
-            margin-bottom: 20px;
-            border-collapse: 6px solid #1f7ae0;
-            padding-left: 15px;
-             text-align: center;
-            justify-content: center;
-            text-decoration: dodgerblue;
-            
-        }
+@media (max-width:850px){
+    .form{
+     grid-template-columns: 1fr;   
+    }
+    .contactInfo:before{
+        bottom: initial;
+        top: -75px;
+        right: 65px;
+        transform: scale(0.95); 
+    }
 
-        .about-section p {
-            font-size: 16.5px;
-            line-height: 1.9;
-            margin-bottom: 18px;
-            text-align: center;
-            justify-content: center;
-        }
 
-        .highlight {
-            color: #1f7ae0;
-            font-weight: 600;
-        }
+    .contactForm:before{
+        top: -13px;
+        left: initial;
+        right: 70px;
 
-        .values {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-             text-align: center;
-            justify-content: center;
-        }
+    }
+    .square{
+        transform: translate(140%, 43%);
+        height: 350px; 
+    }
+    .big-circle{
+        bottom: 75%;
+        transform: scale(0.9) translate(-40%, 30%);
+        right: 50%;
+    }
+    .text{
+        margin: 1rem 0 1.5rem 0;
+    }
+    .social-media{
+        padding: 1.5rem 0 0 0;
+    }
+}
 
-        .value-box {
-            background-color: #f0f5ff;
-            color: #0b3c5d;
-            padding: 12px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
+@media (max-width:480px){
+    .container{
+        padding: 1.5rem;
+    }
+    .contactInfo:before{
+        display: none;
 
-        @media (max-width: 768px) {
-            .about-section {
-                padding: 30px 20px;
-            }
+    }
+    .square,
+    .big-circle{
+        display: none;
+        
+    }
+    form,
+    .contactInfo{
+        padding: 1.7rem 1.6rem;
+    }
+    .text,
+    .information,
+    .social-media p{
+        font-size: 0.8rem;
+    }
+    .title{
+        font-size: 1.15rem;
+    }
+    .social-icon a{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .icon{
+        width: 23px;
+    }
+    .input{
+        padding:0.45rem 1.2rem;
+    }
+    .btn{
+        padding:0.45rem 1.3rem;
+    }
+}
 
-            .about-section h2 {
-                font-size: 26px;
-            }
-        }
     </style>
+   
 </head>
 <body>
+  
 
-    <section class="about-section">
+    <section style="margin-left: 20px;">
         <h2>ስለ እኛ</h2>
 
         <p>
@@ -107,13 +136,58 @@
             አገልግሎት ይሰጣል።
         </p>
 
-        <div class="values">
+        <div style="margin-left: 20px;">
             <div class="value-box">✔ ታማኝነት</div>
             <div class="value-box">✔ ግልፅነት</div>
             <div class="value-box">✔ ተጠያቂነት</div>
             <div class="value-box">✔ ዘመናዊነት</div>
         </div>
     </section>
-<p> <a href="index.php">ወደ ኋላ</a></p>
+     <div style="margin-bottom: 10px;" class="map-container">
+        <h3>እኛን ማግኘት ከፈለጋቹ በዚህ GPS ማግኘት ትችላላቹ </h3>
+        <button type="button" class="btn" id="getLocation">
+            use my location
+        </button>
+        <input type="hidden" name="location" id="location">
+    
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d493.7222499585809!2d38.376249182568195!3d8.124071091221712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x17b341bb0a54e68f%3A0x1f6e50c7fd4e8096!2sBUTAJIRA%20CITY%20ADMINISTRATION%20OFFICE!5e0!3m2!1sen!2set!4v1769694354743!5m2!1sen!2set" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    </div>
+    <script>
+        const locationBtn=document.getElementById("getLocation");
+const locationInput=document.getElementById("location");
+const mapFrame=document.getElementById("mapFrame");
+
+locationBtn.addEventListener("click", ()=>{
+    if(!navigator.geolocation){
+        alert("GPS is not supported on this device");
+        return;
+    }
+        locationBtn.textContent="Getting Location....";
+
+        navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const latitude=position.coords.latitude;
+            const longtude=position.coords.longitude;
+
+            //save location for email
+            locationInput.value = `Latitude: ${latitude}, Longitude: ${longtude}`;
+
+            //update map
+
+            mapFrame.src = `https://www.google.com/maps?q=${latitude},${longtude}&output=embed`;
+
+            alert("✅ ቦታ በትክክል ተጨምሯል");
+            locationBtn.textContent="ቦታ ተጨሯል";
+        },
+        ()=>{
+            alert("Location access denied");
+            locationBtn.textContent="use my location ";
+        }
+
+    );
+});
+
+        </script>
 </body>
 </html>
