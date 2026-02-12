@@ -82,47 +82,10 @@ include "header.php";
         </div>
     </div>
 </section>
-<footer>
-    <div class="footer-container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>አድራሻ</h3>
-                <p>
-                    📍 ቡታጅራ፣ ምስራቅ ጉራጌ<br>
-                    📞 ስልክ: +251 46 115 XXXX<br>
-                    📧 ኢሜይል: info@butajira.gov.et<br>
-                    🕒 የስራ ሰዓት: ሰኞ - አርብ (2:30 - 11:30)
-                </p>
-            </div>
-        </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 የቡታጅራ ከተማ አስተዳደር። መብቱ በህግ የተጠበቀ ነው።</p>
-        </div>
-    </div>
-</footer>
-
-  <script>
-       // ኤለመንቶቹን መምረጥ
-const menu = document.querySelector('#mobile-menu');
-const menuLinks = document.querySelector('#nav-list');
-const navItems = document.querySelectorAll('.nav-links a');
-
-// 1. የሀምበርገር ምልክቱ ሲነካ ሜኑውን ለመክፈት/ለመዝጋት
-menu.addEventListener('click', function() {
-    menuLinks.classList.toggle('active');
-    menu.classList.toggle('is-active');
-});
-
-// 2. ማንኛውም የሜኑ ሊንክ ሲነካ ሜኑው እንዲጠፋ ለማድረግ
-navItems.forEach(link => {
-    link.addEventListener('click', () => {
-        // ሜኑው ክፍት ከሆነ ይዘጋዋል
-        menuLinks.classList.remove('active');
-        menu.classList.remove('is-active');
-    });
-});
-       
-    </script>
+  
 </body>
 </html>
+<?php
+include "footer.php";
+?>

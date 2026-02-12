@@ -8,6 +8,7 @@ include "header.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>የስራ አጥ ምዝገባ - ቡታጅራ</title>
     <link rel="stylesheet" href="styleR.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -167,25 +168,6 @@ include "header.php";
             </div>
         </div>
     </div>
-    <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>አድራሻ</h3>
-                <p>
-                    📍 ቡታጅራ፣ ምስራቅ ጉራጌ<br>
-                    📞 ስልክ: +251 46 115 XXXX<br>
-                    📧 ኢሜይል: info@butajira.gov.et<br>
-                    🕒 የስራ ሰዓት: ሰኞ - አርብ (2:30 - 11:30)
-                </p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 የቡታጅራ ከተማ አስተዳደር። መብቱ በህግ የተጠበቀ ነው።</p>
-        </div>
-    </div>
-</footer>
 
 <script>
 /* ================== ዳይናሚክ መንደር (Villages) ================== */
@@ -270,24 +252,11 @@ ageInput.addEventListener("input", () => {
     }
 });
 
-const mobileMenu = document.getElementById('mobile-menu');
-const navList = document.getElementById('nav-list');
-
-mobileMenu.addEventListener('click', () => {
-    // ሜኑውን መክፈት/መዝጋት (Toggle)
-    mobileMenu.classList.toggle('active');
-    navList.classList.toggle('active');
-});
-
-// ተጠቃሚው አንድ ሊንክ ሲነካ ሜኑው በራሱ እንዲዘጋ (ለተሻለ አጠቃቀም)
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        navList.classList.remove('active');
-    });
-});
 
 </script>
 
 </body>
 </html>
+ <?php
+include "footer.php";
+?>

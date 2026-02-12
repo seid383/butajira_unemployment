@@ -4,7 +4,6 @@ if (!in_array($_SESSION['role'] ?? '', ['admin','staff'])) {
     header("Location: login.php");
     exit();
 }
-
 include("../database/db.php");
 
 /* General Statistics */

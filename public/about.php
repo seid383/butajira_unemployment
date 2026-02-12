@@ -8,103 +8,6 @@ include "header.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us Section</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        
-.map-container{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-h3{
-    color: #333;
-    bottom: 60px;
-
-}
-iframe{
-    width: 82%;
-    height: 500px;
-}
-
-@media (max-width:850px){
-    .form{
-     grid-template-columns: 1fr;   
-    }
-    .contactInfo:before{
-        bottom: initial;
-        top: -75px;
-        right: 65px;
-        transform: scale(0.95); 
-    }
-
-
-    .contactForm:before{
-        top: -13px;
-        left: initial;
-        right: 70px;
-
-    }
-    .square{
-        transform: translate(140%, 43%);
-        height: 350px; 
-    }
-    .big-circle{
-        bottom: 75%;
-        transform: scale(0.9) translate(-40%, 30%);
-        right: 50%;
-    }
-    .text{
-        margin: 1rem 0 1.5rem 0;
-    }
-    .social-media{
-        padding: 1.5rem 0 0 0;
-    }
-}
-
-@media (max-width:480px){
-    .container{
-        padding: 1.5rem;
-    }
-    .contactInfo:before{
-        display: none;
-
-    }
-    .square,
-    .big-circle{
-        display: none;
-        
-    }
-    form,
-    .contactInfo{
-        padding: 1.7rem 1.6rem;
-    }
-    .text,
-    .information,
-    .social-media p{
-        font-size: 0.8rem;
-    }
-    .title{
-        font-size: 1.15rem;
-    }
-    .social-icon a{
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-    }
-    .icon{
-        width: 23px;
-    }
-    .input{
-        padding:0.45rem 1.2rem;
-    }
-    .btn{
-        padding:0.45rem 1.3rem;
-    }
-}
-
-    </style>
    
 </head>
 <body>
@@ -191,3 +94,6 @@ locationBtn.addEventListener("click", ()=>{
         </script>
 </body>
 </html>
+<?php
+include "footer.php";
+?>

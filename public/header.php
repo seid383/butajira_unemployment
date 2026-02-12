@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <header class="navbar">
         <div class="container">
             <div class="logo">
-                        <img src="images/logo.jpg" alt="Butajira Logo">
+                        <img src="images/logo2.jpg" alt="Butajira Logo">
 
                 <span class="logo-text">ቡታጅራ</span><span class="logo-accent"> ኢንትርፕራዝ ቢሮ</span>
             </div>
@@ -32,5 +32,27 @@
         </div>
     </header>
 
+  <script>
+       // ኤለመንቶቹን መምረጥ
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('#nav-list');
+const navItems = document.querySelectorAll('.nav-links a');
+
+// 1. የሀምበርገር ምልክቱ ሲነካ ሜኑውን ለመክፈት/ለመዝጋት
+menu.addEventListener('click', function() {
+    menuLinks.classList.toggle('active');
+    menu.classList.toggle('is-active');
+});
+
+// 2. ማንኛውም የሜኑ ሊንክ ሲነካ ሜኑው እንዲጠፋ ለማድረግ
+navItems.forEach(link => {
+    link.addEventListener('click', () => {
+        // ሜኑው ክፍት ከሆነ ይዘጋዋል
+        menuLinks.classList.remove('active');
+        menu.classList.remove('is-active');
+    });
+});
+       
+    </script>
 </body>
 </html>
