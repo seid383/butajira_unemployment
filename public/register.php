@@ -1,5 +1,5 @@
  <?php
-include "header.php";
+include "../header/header.php";
 ?>
  <!DOCTYPE html>
 <html lang="am">
@@ -45,7 +45,7 @@ include "header.php";
             </div>
 
             <div class="card-body">
-                <form action="save.php" method="POST" id="registrationForm">
+                <form action="save.php" method="POST" id="registrationForm"   enctype="multipart/form-data">
 
                     <div class="mb-3">
                         <label class="form-label">ሙሉ ስም</label>
@@ -79,10 +79,24 @@ include "header.php";
                         <select name="education" class="form-select" required>
                             <option value="">-- ይምረጡ --</option>
                             <option value="ያልተማረ">ያልተማረ</option>
+                            <option value="ያልተማረች">ያልተማረች</option>
+                            <option value="1">1ኛ ክፍል</option>
+                            <option value="2">2ኛ ክፍል</option>
+                            <option value="3">3ኛ ክፍል</option>
+                            <option value="4">4ኛ ክፍል</option>
+                            <option value="5">5ኛ ክፍል</option>
+                            <option value="6">6ኛ ክፍል</option>
+                            <option value="7">7ኛ ክፍል</option>
+                            <option value="8">8ኛ ክፍል</option>
+                            <option value="9">9ኛ ክፍል</option>
+                            <option value="10">10ኛ ክፍል</option>
+                            <option value="11">11ኛ ክፍል</option>
                             <option value="12">12ኛ ክፍል</option>
                             <option value="TVT">TVT (ቴክኒክና ሙያ)</option>
                             <option value="Degree">Degree (መጀመሪያ ድግሪ)</option>
-                            <option value="Master">Master (ሁለተኛ ድግሪ)</option>
+                            <option value="Master">Master (ሁለተኛ ድግሪ)</option>                            
+                            <option value="ከማሰተር በላይ">ከማስተር በላይ</option>                            
+
                         </select>
                     </div>
 
@@ -155,6 +169,10 @@ include "header.php";
                             </select>
                         </div>
                     </div>
+                     <div class="mb-3">
+                       <label class="form-label">የትምህርት ማስረጃ (PDF ወይም ምስል)</label>
+                         <input type="file" name="document" class="form-control" accept=".pdf,.doc,.jpg,.png" required>
+                         </div>
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success">መረጃውን መዝግብ</button>

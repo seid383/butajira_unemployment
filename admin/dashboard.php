@@ -73,7 +73,7 @@ foreach ($kebeles as $k) {
         <a class="btn btn-primary" href="reports.php">Reports</a>
         <a href="view_users.php" class="btn btn-success">View Job Seekers</a>
         <a class="btn btn-success" href="export_excel.php">Export Excel</a>
-        <a class="btn btn-danger" href="logout.php">Logout</a>
+        <a class="btn btn-danger" href="../Login_and_Signup/logout-user.php">Logout</a>
         <a href="../public/index.php" class="btn btn-secondary">Back to Public Website</a>
     </div>
 

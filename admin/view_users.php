@@ -126,6 +126,7 @@ $result = mysqli_query($conn, $sql);
                     <th>አደረጃጀት</th>
                     <th>ባዮሜትሪክ</th>
                     <th>የተመዘገበበት/ችበት ቀን</th>
+                    <th>የተጫነ ፋይል</th>
                     <th>ስራ የገባበት/ችበት ቀን</th>
                     
                     <?php if($_SESSION['role'] === 'admin'): ?>
@@ -152,6 +153,21 @@ $result = mysqli_query($conn, $sql);
                     <td><?= $row['structure'] ?></td>
                     <td><?= $row['biometrics'] ?></td>
                     <td><?= $row['registered_at'] ?></td>
+
+<td>
+    <?php if (!empty($row['document_path'])): ?>
+        <a href="../public/uploads/upload.php<?= htmlspecialchars($row['document_path']) ?>" 
+           target="_blank" 
+           class="btn btn-success" 
+           style="padding: 2px 8px; font-size: 12px;" 
+           download>
+            📥 አውርድ (Download)
+        </a>
+    <?php else: ?>
+        <span style="color: #999; font-size: 12px;">ፋይል የለም</span>
+    <?php endif; ?>
+</td>
+
                     <td><?= $row['created_at'] ?></td>
                     
                     <?php if($_SESSION['role'] === 'admin'): ?>

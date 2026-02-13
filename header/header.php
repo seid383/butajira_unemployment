@@ -9,7 +9,7 @@
     <header class="navbar">
         <div class="container">
             <div class="logo">
-                        <img src="images/logo2.jpg" alt="Butajira Logo">
+                        <img src="../images/logo2.jpg" alt="Butajira Logo">
 
                 <span class="logo-text">ቡታጅራ</span><span class="logo-accent"> ኢንትርፕራዝ ቢሮ</span>
             </div>
@@ -22,11 +22,11 @@
 
             <nav class="nav-container">
                 <ul class="nav-links" id="nav-list">
-                    <li><a href="index.php">መነሻ</a></li>
-                    <li><a href="about.php">ስለ እኛ</a></li> 
+                    <li><a href="../public/index.php">መነሻ</a></li>
+                    <li><a href="../public/about.php">ስለ እኛ</a></li> 
                      <li><a href="#requirements">መስፈርቶች</a></li>
                     <li><a href="annoucement.php">ማስታወቅያ</a></li> 
-                    <li><a href="register.php">መመዝገብ</a></li>
+                    <li><a href="../public/register.php">መመዝገብ</a></li>
                 </ul>
             </nav>
         </div>

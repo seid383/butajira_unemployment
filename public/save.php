@@ -1,63 +1,54 @@
 <?php
 include("../database/db.php");
 
-/* ===== 1. BASIC VALIDATION ===== */
-$age = isset($_POST['age']) ? (int)$_POST['age'] : 0;
-if ($age < 18 || $age > 64) {
-    die("Error: እድሜዎ ከ18 በታች ወይም ከ64 በላይ ስለሆነ መመዝገብ አይችሉም።");
-}
-
-/* ===== 2. RECEIVE & CLEAN DATA ===== */
+/* ===== 1. መሰረታዊ መረጃዎችን መቀበልና ማፅዳት ===== */
 $full_name = mysqli_real_escape_string($conn, $_POST['full_name'] ?? '');
 $gender    = mysqli_real_escape_string($conn, $_POST['gender'] ?? '');
+$age       = isset($_POST['age']) ? (int)$_POST['age'] : 0;
 $phone     = mysqli_real_escape_string($conn, $_POST['phone'] ?? '');
-
-// Validation for Phone
-if(!preg_match('/^(09|07)[0-9]{8}$|^(?:\+251|251)(9|7)[0-9]{8}$/', $phone)){
-    exit("❌ Invalid Ethiopian phone number");
-} 
-
 $education_level = mysqli_real_escape_string($conn, $_POST['education'] ?? '');
 $kebele          = mysqli_real_escape_string($conn, $_POST['kebele'] ?? '');
 
-// Logic for "Other" Village
-$village = mysqli_real_escape_string($conn, $_POST['village_select'] ?? '');
-if ($village == 'ሌላ') {
-    $village = mysqli_real_escape_string($conn, $_POST['village_other'] ?? '');
-}
+// መንደር እና የስራ ፍላጎት (ሌላ ተመርጦ ከሆነ)
+$village = ($_POST['village_select'] == 'ሌላ') ? mysqli_real_escape_string($conn, $_POST['village_other']) : mysqli_real_escape_string($conn, $_POST['village_select']);
+$job_interest = ($_POST['job_select'] == 'ሌላ') ? mysqli_real_escape_string($conn, $_POST['job_other']) : mysqli_real_escape_string($conn, $_POST['job_select']);
 
-// Logic for "Other" Job
-$job_interest = mysqli_real_escape_string($conn, $_POST['job_select'] ?? '');
-if ($job_interest == 'ሌላ') {
-    $job_interest = mysqli_real_escape_string($conn, $_POST['job_other'] ?? '');
-}
-
-/* ===== 3. DEFAULT VALUES ===== */
-// These match your original table columns but provide defaults if the form skips them
-$region    = "ማእከላዊ ኢትዮጵያ";
-$zone      = "ምስራቅ ጉራጌ";
-$town      = "ቡታጅራ";
 $situation = mysqli_real_escape_string($conn, $_POST['special'] ?? 'መደበኛ');
 $structure = mysqli_real_escape_string($conn, $_POST['structure'] ?? 'በግል');
 
-/* ===== 4. EMPTY FIELD CHECK ===== */
-if (empty($full_name) || empty($phone) || empty($village) || empty($job_interest)) {
-    echo "<h3 style='color:red;'>❌ ያልተሞላ ነገር አለ፣ እባኮ በድጋሚ ይሙሉ!</h3>";
-    echo "<a href='register.php'>ወደ ኋላ ተመለስ</a>";
-    exit();
+/* ===== 2. የፋይል ጭነት (File Upload Logic) ===== */
+$new_file_name = NULL; // ፋይል ካልተመረጠ ባዶ እንዲሆን
+
+if (isset($_FILES['document']) && $_FILES['document']['error'] == 0) {
+    $upload_dir = "uploads/upload.php";
+    
+    // ፎልደሩ ከሌለ እንዲፈጠር ማድረግ
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    $file_name = $_FILES['document']['name'];
+    $file_tmp = $_FILES['document']['tmp_name'];
+    
+    // የፋይሉን ስም ልዩ ማድረግ
+    $new_file_name = time() . "_" . preg_replace("/[^a-zA-Z0-9.]/", "_", $file_name);
+    $target_file = $upload_dir . $new_file_name;
+
+    if (!move_uploaded_file($file_tmp, $target_file)) {
+        die("❌ ፋይሉን ወደ ፎልደሩ መጫን አልተቻለም።");
+    }
 }
 
-/* ===== 5. INSERT DATA ===== */
+/* ===== 3. ሁሉንም ዳታ በአንድ ላይ ወደ ዳታቤዝ ማስገባት ===== */
 $sql = "INSERT INTO job_seekers 
-(full_name, gender, age, phone, education_level, region, zone, town, kebele, village_select, job_interest, situation, structure) 
+(full_name, gender, age, phone, education_level, region, zone, town, kebele, village_select, job_interest, situation, structure, document_path) 
 VALUES 
-('$full_name', '$gender', '$age', '$phone', '$education_level', '$region', '$zone', '$town', '$kebele', '$village', '$job_interest', '$situation', '$structure')";
+('$full_name', '$gender', '$age', '$phone', '$education_level', 'ማእከላዊ ኢትዮጵያ', 'ምስራቅ ጉራጌ', 'ቡታጅራ', '$kebele', '$village', '$job_interest', '$situation', '$structure', '$new_file_name')";
 
 if (mysqli_query($conn, $sql)) {
-    // REDIRECT back to register.php with success status to trigger the MODAL
     header("Location: register.php?status=success");
     exit();
 } else {
-    echo "Database Error: " . mysqli_error($conn);
+    echo "❌ የዳታቤዝ ስህተት: " . mysqli_error($conn);
 }
 ?>

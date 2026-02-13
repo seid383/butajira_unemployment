@@ -41,7 +41,7 @@ $total = mysqli_fetch_assoc(
         <a href="staff_view.php" class="btn btn-primary">View Records</a>
         <a href="reports.php" class="btn btn-secondary"> Reports</a>
         <a href="export_excel.php" class="btn btn-success">Export Excel</a>
-        <a href="../admin/logout.php" class="btn btn-danger">Logout</a>
+        <a href="../Login_and_Signup/logout-user.php" class="btn btn-danger">Logout</a>
     </div>
 
 </div>
